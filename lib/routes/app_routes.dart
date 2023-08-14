@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_recipes/presentation/pages/foodByCountry/bloc/food_country_bloc.dart';
+import 'package:food_recipes/presentation/pages/foodByCountry/food_country_page.dart';
+import 'package:food_recipes/presentation/pages/foodByIngredients/bloc/food_ingredient_bloc.dart';
+import 'package:food_recipes/presentation/pages/foodByIngredients/food_ingredients_page.dart';
 import 'package:food_recipes/presentation/pages/home/bloc/all_categories/all_categories_bloc.dart';
 import 'package:food_recipes/presentation/pages/home/bloc/bloc_cooking_ide/cooking_idea_bloc.dart';
+import 'package:food_recipes/presentation/pages/introduction/bloc/intro_bloc.dart';
 import 'package:food_recipes/presentation/pages/introduction/introduction_page.dart';
 import 'package:food_recipes/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:food_recipes/presentation/widget/bottom_navigation_widget.dart';
@@ -9,7 +14,10 @@ import 'package:food_recipes/presentation/widget/bottom_navigation_widget.dart';
 class AppRoutes {
   var routes = <String, WidgetBuilder>{
     '/': (context) => const SplashScreen(),
-    '/intro': (context) => const IntroductionPage(),
+    '/intro': (context) => BlocProvider(
+          create: (context) => IntroBloc(),
+          child: const IntroductionPage(),
+        ),
     '/home': (context) => MultiBlocProvider(providers: [
           BlocProvider(
             create: (context) => CookingIdeaBloc()
@@ -24,5 +32,13 @@ class AppRoutes {
               ),
           ),
         ], child: const BottomNavigationWidget()),
+    '/foodCountryPage': (context) => BlocProvider(
+          create: (context) => FoodCountryBloc()..add(EventFoodCountry()),
+          child: const FoodCountryPage(),
+        ),
+    '/foodIngredientsPage': (context) => BlocProvider(
+          create: (context) => FoodIngredientBloc()..add(EventFoodIngredient()),
+          child: const FoodIngredientsPage(),
+        ),
   };
 }

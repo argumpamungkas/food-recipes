@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,8 +14,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5))
-        .then((value) => Navigator.of(context).pushReplacementNamed("/intro"));
+    Future.delayed(const Duration(seconds: 5)).then((value) async {
+      final SharedPreferences sharedPrefs =
+          await SharedPreferences.getInstance();
+      final introKey = sharedPrefs.getBool("introKey");
+      if (introKey == true) {
+        Navigator.pushReplacementNamed(context, "/home");
+      } else {
+        Navigator.pushReplacementNamed(context, "/intro");
+      }
+    });
   }
 
   @override

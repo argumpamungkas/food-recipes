@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:food_recipes/data/models/all_categories_food.dart';
+import 'package:food_recipes/data/models/food_country.dart';
+import 'package:food_recipes/data/models/food_ingredient.dart';
 import 'package:food_recipes/data/models/random_food.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,6 +43,48 @@ class MealRepository {
           return allCategories
               .map((e) => AllCategoriesFood.fromJson(e))
               .toList();
+        }
+      } else {
+        throw Exception("Failed to Load data");
+      }
+    } on SocketException {
+      throw Exception("Check Internet Connection");
+    }
+  }
+
+  Future<List<FoodCountry>> getFoodCountry() async {
+    Uri urlParse = Uri.parse("${ApiConst.baseUrl}/list.php?a=list");
+    var response = await http.get(urlParse);
+
+    try {
+      if (response.statusCode == 200) {
+        List allCountry = jsonDecode(response.body)["meals"];
+
+        if (allCountry.isEmpty) {
+          return [];
+        } else {
+          return allCountry.map((e) => FoodCountry.fromJson(e)).toList();
+        }
+      } else {
+        throw Exception("Failed to Load data");
+      }
+    } on SocketException {
+      throw Exception("Check Internet Connection");
+    }
+  }
+
+  Future<List<FoodIngredient>> getAllIngredient() async {
+    Uri urlParse = Uri.parse("${ApiConst.baseUrl}/list.php?i=list");
+    var response = await http.get(urlParse);
+
+    try {
+      if (response.statusCode == 200) {
+        List allIngredient = jsonDecode(response.body)["meals"];
+
+        if (allIngredient.isEmpty) {
+          return [];
+        } else {
+          return allIngredient.map((e) => FoodIngredient.fromJson(e)).toList();
         }
       } else {
         throw Exception("Failed to Load data");

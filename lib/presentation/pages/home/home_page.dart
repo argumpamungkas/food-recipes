@@ -19,11 +19,26 @@ class HomePage extends StatelessWidget {
         title: const Text(
           "FOOD RECIPES",
           style: TextStyle(
-              fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.amber,
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<CookingIdeaBloc>().add(EventCookingIdea());
+              context.read<AllCategoriesBloc>().add(EventAllCategories());
+            },
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.black,
+            ),
+          )
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(2),
           child: Container(
@@ -49,7 +64,8 @@ class HomePage extends StatelessWidget {
                       assetName: "assets/images/bg_country.webp",
                       iconData: Icons.flag,
                       title: "Food by Country",
-                      navigate: () {},
+                      navigate: () =>
+                          Navigator.pushNamed(context, "/foodCountryPage"),
                     ),
                   ),
                   const SizedBox(width: 20),
@@ -60,7 +76,8 @@ class HomePage extends StatelessWidget {
                       assetName: "assets/images/bg_ingredients.jpg",
                       iconData: Icons.food_bank,
                       title: "Food by Ingredients",
-                      navigate: () {},
+                      navigate: () =>
+                          Navigator.pushNamed(context, "/foodIngredientsPage"),
                     ),
                   ),
                 ],

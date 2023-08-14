@@ -73,6 +73,7 @@ class CookingIdea extends StatelessWidget {
                     ),
                     Text(
                       "$titleArea, $titleCategory",
+                      style: TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 10),
                     const Text(

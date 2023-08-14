@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_recipes/presentation/pages/introduction/bloc/intro_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -8,6 +10,7 @@ class IntroductionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double statusBarHeight = MediaQuery.of(context).viewPadding.top;
+
     return Scaffold(
       backgroundColor: Colors.amber.shade300,
       body: Padding(
@@ -52,24 +55,32 @@ class IntroductionPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, "/home");
+            BlocListener<IntroBloc, IntroState>(
+              listener: (context, state) {
+                if (state is IntroSuccess) {
+                  Navigator.pushReplacementNamed(context, "/home");
+                }
               },
-              style: ElevatedButton.styleFrom(
+              child: ElevatedButton(
+                onPressed: () {
+                  context.read<IntroBloc>().add(EventIntro());
+                },
+                style: ElevatedButton.styleFrom(
                   fixedSize: Size(width, 60),
                   backgroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
-                  )),
-              child: const Text(
-                "Get Started",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: const Text(
+                  "Get Started",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
