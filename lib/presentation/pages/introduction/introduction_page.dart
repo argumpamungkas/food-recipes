@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipes/presentation/widget/bottom_navigation_widget.dart';
 import 'package:lottie/lottie.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -55,12 +54,7 @@ class IntroductionPage extends StatelessWidget {
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BottomNavigationWidget(),
-                  ),
-                );
+                Navigator.pushReplacementNamed(context, "/home");
               },
               style: ElevatedButton.styleFrom(
                   fixedSize: Size(width, 60),

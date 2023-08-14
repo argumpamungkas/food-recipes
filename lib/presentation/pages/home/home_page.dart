@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipes/presentation/pages/favourite/favourite_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_recipes/presentation/pages/home/bloc/all_categories/all_categories_bloc.dart';
+import 'package:food_recipes/presentation/pages/home/bloc/bloc_cooking_ide/cooking_idea_bloc.dart';
+import 'package:food_recipes/presentation/pages/home/widget/container_all_categories.dart.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'widget/container_cook_idea.dart';
 import 'widget/container_filter.dart';
@@ -10,7 +14,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double statusBarHeight = MediaQuery.of(context).viewPadding.top;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -63,6 +66,9 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+              Divider(
+                color: Colors.grey.shade300,
+              ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -71,53 +77,138 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              CookingIdea(
-                width: width,
-                networkImageName:
-                    "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg",
-                titleFood: "Banana Cakes",
-                titleArea: "America",
-                titleCategory: "Dessert",
-                titleSuitible: "Dessert, Breakfast",
-              ),
-              const SizedBox(height: 20),
-              GridView.builder(
-                itemCount: 20,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1.6 / 2),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://freepngimg.com/thumb/food/139184-food-plate-healthy-free-photo.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+              BlocBuilder<CookingIdeaBloc, CookingIdeaState>(
+                builder: (context, state) {
+                  if (state is CookingIdeaLoading) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade100,
+                      highlightColor: Colors.grey.shade300,
+                      child: Container(
+                        width: width - 100,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        const SizedBox(height: 10),
-                        const Text("Beef"),
-                      ],
-                    ),
+                      ),
+                    );
+                  }
+                  if (state is CookingIdeaSuccess) {
+                    return CookingIdea(
+                      width: width,
+                      networkImageName: state.randomFood.mealThumb,
+                      titleFood: state.randomFood.nameMeal,
+                      titleArea: state.randomFood.mealArea,
+                      titleCategory: state.randomFood.mealCategory,
+                      titleSuitible: state.randomFood.mealTags,
+                    );
+                  }
+                  return CookingIdea(
+                    width: width,
+                    networkImageName:
+                        "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg",
+                    titleFood: "",
+                    titleArea: "",
+                    titleCategory: "",
+                    titleSuitible: "",
                   );
                 },
-              )
+              ),
+              const SizedBox(height: 20),
+              Divider(
+                color: Colors.grey.shade300,
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "What's Cooking Now?",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              const SizedBox(height: 20),
+              BlocBuilder<AllCategoriesBloc, AllCategoriesState>(
+                builder: (context, state) {
+                  if (state is AllCategoriesLoading) {
+                    return GridView.builder(
+                      itemCount: 9,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 1.6 / 2),
+                      itemBuilder: (context, index) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.shade100,
+                          highlightColor: Colors.grey.shade300,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  if (state is AllCategoriesSuccess) {
+                    return GridView.builder(
+                      itemCount: state.result.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 1.6 / 2),
+                      itemBuilder: (context, index) {
+                        return Material(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                          child: InkWell(
+                            onTap: () {},
+                            splashColor: Colors.amber.shade200,
+                            highlightColor: Colors.amber.shade200,
+                            borderRadius: BorderRadius.circular(20),
+                            child: ContainerAllCategory(
+                              thumbFood: state.result[index].thumb,
+                              category: state.result[index].category,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return GridView.builder(
+                    itemCount: 9,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1.6 / 2),
+                    itemBuilder: (context, index) {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade300,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),

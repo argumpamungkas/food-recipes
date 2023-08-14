@@ -21,9 +21,11 @@ class CookingIdea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.grey.shade200,
+      color: Colors.grey.shade100,
       borderRadius: BorderRadius.circular(10),
       elevation: 5,
+      shadowColor: Colors.blueGrey.shade300,
+      animationDuration: const Duration(seconds: 3),
       child: InkWell(
         onTap: () {},
         splashColor: Colors.amber,
@@ -31,15 +33,11 @@ class CookingIdea extends StatelessWidget {
         highlightColor: Colors.amber,
         borderRadius: BorderRadius.circular(10),
         child: Container(
+          constraints: const BoxConstraints(maxHeight: 150),
           width: width - 100,
-          height: 150,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              width: 2,
-              color: Colors.amber,
-            ),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,6 +46,7 @@ class CookingIdea extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Container(
+                  margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -59,7 +58,7 @@ class CookingIdea extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Flexible(
-                flex: 2,
+                flex: 1,
                 fit: FlexFit.tight,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -67,7 +66,6 @@ class CookingIdea extends StatelessWidget {
                   children: [
                     Text(
                       titleFood,
-                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -75,15 +73,14 @@ class CookingIdea extends StatelessWidget {
                     ),
                     Text(
                       "$titleArea, $titleCategory",
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
                     ),
                     const SizedBox(height: 10),
                     const Text(
                       "Suitible",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       titleSuitible,

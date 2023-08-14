@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'presentation/pages/splash_screen/splash_screen.dart';
+import 'package:food_recipes/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      initialRoute: '/',
+      routes: AppRoutes().routes,
     );
   }
 }
