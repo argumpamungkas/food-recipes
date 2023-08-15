@@ -11,7 +11,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
       final SharedPreferences sharedPrefs =
           await SharedPreferences.getInstance();
       emit(IntroLoading());
-      Future.delayed(Duration(seconds: 2)).then((value) async {
+      Future.delayed(const Duration(seconds: 2)).then((value) async {
         return await sharedPrefs.setBool("introKey", true);
       });
       emit(IntroSuccess());

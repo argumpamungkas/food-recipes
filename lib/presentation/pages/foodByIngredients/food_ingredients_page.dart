@@ -50,7 +50,7 @@ class FoodIngredientsPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 50,
                         height: 50,
                         child: CachedNetworkImage(

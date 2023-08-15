@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                     return CookingIdea(
                       width: width,
                       networkImageName: state.randomFood.mealThumb,
-                      titleFood: state.randomFood.nameMeal,
+                      titleFood: state.randomFood.mealName,
                       titleArea: state.randomFood.mealArea,
                       titleCategory: state.randomFood.mealCategory,
                       titleSuitible: state.randomFood.mealTags,
@@ -187,7 +187,11 @@ class HomePage extends StatelessWidget {
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(20),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              "/detailFoodCategory",
+                              arguments: state.result[index].category,
+                            ),
                             splashColor: Colors.amber.shade200,
                             highlightColor: Colors.amber.shade200,
                             borderRadius: BorderRadius.circular(20),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:food_recipes/data/models/all_categories_food.dart';
+import 'package:food_recipes/data/models/filter_food.dart';
 import 'package:food_recipes/data/models/food_country.dart';
 import 'package:food_recipes/data/models/food_ingredient.dart';
 import 'package:food_recipes/data/models/random_food.dart';
@@ -85,6 +86,27 @@ class MealRepository {
           return [];
         } else {
           return allIngredient.map((e) => FoodIngredient.fromJson(e)).toList();
+        }
+      } else {
+        throw Exception("Failed to Load data");
+      }
+    } on SocketException {
+      throw Exception("Check Internet Connection");
+    }
+  }
+
+  Future<List<FilterFood>> getCategoryFilterFood(String categoryName) async {
+    Uri urlParse = Uri.parse("${ApiConst.baseUrl}/filter.php?c=$categoryName");
+    var response = await http.get(urlParse);
+
+    try {
+      if (response.statusCode == 200) {
+        List allFood = jsonDecode(response.body)["meals"];
+
+        if (allFood.isEmpty) {
+          return [];
+        } else {
+          return allFood.map((e) => FilterFood.fromJson(e)).toList();
         }
       } else {
         throw Exception("Failed to Load data");

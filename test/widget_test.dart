@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:food_recipes/data/const/api_const.dart';
-import 'package:food_recipes/data/models/food_country.dart';
 import 'package:http/http.dart' as http;
 
 void main() async {

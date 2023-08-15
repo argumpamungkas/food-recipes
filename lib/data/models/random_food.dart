@@ -1,6 +1,6 @@
 class RandomFood {
   String id;
-  String nameMeal;
+  String mealName;
   String mealCategory;
   String mealArea;
   String mealThumb;
@@ -8,7 +8,7 @@ class RandomFood {
 
   RandomFood({
     required this.id,
-    required this.nameMeal,
+    required this.mealName,
     required this.mealCategory,
     required this.mealArea,
     required this.mealThumb,
@@ -17,7 +17,7 @@ class RandomFood {
 
   factory RandomFood.fromJson(Map<String, dynamic> json) => RandomFood(
         id: json["idMeal"] ?? "",
-        nameMeal: json["strMeal"] ?? "",
+        mealName: json["strMeal"] ?? "",
         mealCategory: json["strCategory"] ?? "",
         mealArea: json["strArea"] ?? "",
         mealThumb: json["strMealThumb"] ?? "",
@@ -26,7 +26,7 @@ class RandomFood {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "nameMeal": nameMeal,
+        "mealName": mealName,
         "mealCategory": mealCategory,
         "mealArea": mealArea,
         "mealThumb": mealThumb,
