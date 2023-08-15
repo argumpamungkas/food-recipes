@@ -4,6 +4,8 @@ import 'package:food_recipes/presentation/pages/detailFoodCategory/bloc/detail_f
 import 'package:food_recipes/presentation/pages/detailFoodCategory/detail_food_category.dart';
 import 'package:food_recipes/presentation/pages/detailFoodCountry/bloc/detail_food_country_bloc.dart';
 import 'package:food_recipes/presentation/pages/detailFoodCountry/detail_food_country_page.dart';
+import 'package:food_recipes/presentation/pages/detailFoodIngredient/bloc/detail_food_ingredient_bloc.dart';
+import 'package:food_recipes/presentation/pages/detailFoodIngredient/detail_food_ingredient_page.dart';
 import 'package:food_recipes/presentation/pages/foodByCountry/bloc/food_country_bloc.dart';
 import 'package:food_recipes/presentation/pages/foodByCountry/food_country_page.dart';
 import 'package:food_recipes/presentation/pages/foodByIngredients/bloc/food_ingredient_bloc.dart';
@@ -51,6 +53,10 @@ class AppRoutes {
     '/detailFoodCountry': (context) => BlocProvider(
           create: (context) => DetailFoodCountryBloc(),
           child: const DetailFoodCountryPage(),
+        ),
+    '/detailFoodIngredient': (context) => BlocProvider(
+          create: (context) => DetailFoodIngredientBloc(),
+          child: const DetailFoodIngredientPage(),
         ),
   };
 }

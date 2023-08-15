@@ -41,36 +41,43 @@ class FoodIngredientsPage extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(10),
+                return InkWell(
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    '/detailFoodIngredient',
+                    arguments: state.allIngredient[index].ingredient,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "${ApiConst.baseUrlImage}/${state.allIngredient[index].ingredient}.png",
-                          progressIndicatorBuilder: (context, url, progress) =>
-                              Center(
-                            child: LoadingAnimationWidget.flickr(
-                              leftDotColor: Colors.amber,
-                              rightDotColor: Colors.black,
-                              size: 20,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "${ApiConst.baseUrlImage}/${state.allIngredient[index].ingredient}.png",
+                            progressIndicatorBuilder:
+                                (context, url, progress) => Center(
+                              child: LoadingAnimationWidget.flickr(
+                                leftDotColor: Colors.amber,
+                                rightDotColor: Colors.black,
+                                size: 20,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        state.allIngredient[index].ingredient,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        Text(
+                          state.allIngredient[index].ingredient,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
