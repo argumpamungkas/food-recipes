@@ -34,7 +34,7 @@ class CookingIdea extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Container(
           constraints: const BoxConstraints(maxHeight: 150),
-          width: width - 100,
+          width: width - 50,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -85,6 +85,7 @@ class CookingIdea extends StatelessWidget {
                     ),
                     Text(
                       titleSuitible,
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),

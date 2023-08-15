@@ -39,19 +39,26 @@ class FoodCountryPage extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(10),
+                return InkWell(
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    "/detailFoodCountry",
+                    arguments: state.allCountry[index].country,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image.asset(
-                          "assets/images/flags/${state.allCountry[index].country}.png"),
-                      Text(state.allCountry[index].country),
-                    ],
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                            "assets/images/flags/${state.allCountry[index].country}.png"),
+                        Text(state.allCountry[index].country),
+                      ],
+                    ),
                   ),
                 );
               },

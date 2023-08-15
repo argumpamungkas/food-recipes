@@ -10,7 +10,6 @@ class DetailFoodCategoryBloc
     extends Bloc<DetailFoodCategoryEvent, DetailFoodCategoryState> {
   DetailFoodCategoryBloc() : super(DetailFoodCategoryInitial()) {
     on<EventDetailFoodCategory>((event, emit) async {
-      print("DIPANGGIL");
       emit(DetailFoodCategoryLoading());
       List<FilterFood> allFood =
           await MealRepository().getCategoryFilterFood(event.nameMeal);

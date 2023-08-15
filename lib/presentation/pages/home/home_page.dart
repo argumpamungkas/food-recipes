@@ -31,7 +31,6 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: () {
               context.read<CookingIdeaBloc>().add(EventCookingIdea());
-              context.read<AllCategoriesBloc>().add(EventAllCategories());
             },
             icon: const Icon(
               Icons.refresh,
@@ -101,7 +100,7 @@ class HomePage extends StatelessWidget {
                       baseColor: Colors.grey.shade100,
                       highlightColor: Colors.grey.shade300,
                       child: Container(
-                        width: width - 100,
+                        width: width - 50,
                         height: 150,
                         decoration: BoxDecoration(
                           color: Colors.amber,
