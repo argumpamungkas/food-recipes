@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class CookingIdea extends StatelessWidget {
@@ -68,7 +70,7 @@ class CookingIdea extends StatelessWidget {
                       titleFood,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 17,
                       ),
                     ),
                     Text(
@@ -80,7 +82,8 @@ class CookingIdea extends StatelessWidget {
                       "Suitible",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 15,
+                        color: Colors.black54,
                       ),
                     ),
                     Text(

@@ -14,6 +14,7 @@ import 'package:food_recipes/presentation/pages/home/bloc/all_categories/all_cat
 import 'package:food_recipes/presentation/pages/home/bloc/bloc_cooking_ide/cooking_idea_bloc.dart';
 import 'package:food_recipes/presentation/pages/introduction/bloc/intro_bloc.dart';
 import 'package:food_recipes/presentation/pages/introduction/introduction_page.dart';
+import 'package:food_recipes/presentation/pages/search/bloc/search_food_bloc.dart';
 import 'package:food_recipes/presentation/pages/splashScreen/splash_screen.dart';
 import 'package:food_recipes/presentation/widget/bottom_navigation_widget.dart';
 
@@ -36,6 +37,9 @@ class AppRoutes {
               ..add(
                 EventAllCategories(),
               ),
+          ),
+          BlocProvider(
+            create: (context) => SearchFoodBloc(),
           ),
         ], child: const BottomNavigationWidget()),
     '/foodCountryPage': (context) => BlocProvider(

@@ -10,7 +10,7 @@ class FilterFood {
   });
 
   factory FilterFood.fromJson(Map<String, dynamic> json) => FilterFood(
-        id: json["strMeal"] ?? "",
+        id: json["idMeal"] ?? "",
         mealName: json["strMeal"] ?? "",
         mealThumb: json["strMealThumb"] ?? "",
       );

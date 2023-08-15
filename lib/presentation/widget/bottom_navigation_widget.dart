@@ -15,7 +15,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
 
   List showWidget = [
     const HomePage(),
-    const SearchPage(),
+    SearchPage(),
     const FavouritePage(),
   ];
 

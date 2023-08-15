@@ -157,4 +157,25 @@ class MealRepository {
       throw Exception("Check Internet Connection");
     }
   }
+
+  Future<List<FilterFood>> searchFood(String food) async {
+    Uri urlParse = Uri.parse("${ApiConst.baseUrl}/search.php?s=$food");
+    var response = await http.get(urlParse);
+
+    try {
+      if (response.statusCode == 200) {
+        List? allFood = jsonDecode(response.body)["meals"];
+
+        if (allFood == null || allFood.isEmpty) {
+          return [];
+        } else {
+          return allFood.map((e) => FilterFood.fromJson(e)).toList();
+        }
+      } else {
+        throw Exception("Failed to Load data");
+      }
+    } on SocketException {
+      throw Exception("Check Internet Connection");
+    }
+  }
 }
