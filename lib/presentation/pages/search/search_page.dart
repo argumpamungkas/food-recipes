@@ -87,6 +87,11 @@ class SearchPage extends StatelessWidget {
                       itemCount: state.allFood.length,
                       itemBuilder: (context, index) {
                         return ListTile(
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            "/detailFood",
+                            arguments: state.allFood[index].id,
+                          ),
                           style: ListTileStyle.drawer,
                           contentPadding: const EdgeInsets.symmetric(
                             vertical: 10,

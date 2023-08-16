@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_recipes/presentation/pages/detailFood/bloc/detail_food_bloc.dart';
+import 'package:food_recipes/presentation/pages/detailFood/detail_food_page.dart';
 import 'package:food_recipes/presentation/pages/detailFoodCategory/bloc/detail_food_category_bloc.dart';
 import 'package:food_recipes/presentation/pages/detailFoodCategory/detail_food_category.dart';
 import 'package:food_recipes/presentation/pages/detailFoodCountry/bloc/detail_food_country_bloc.dart';
@@ -61,6 +63,10 @@ class AppRoutes {
     '/detailFoodIngredient': (context) => BlocProvider(
           create: (context) => DetailFoodIngredientBloc(),
           child: const DetailFoodIngredientPage(),
+        ),
+    '/detailFood': (context) => BlocProvider(
+          create: (context) => DetailFoodBloc(),
+          child: const DetailFoodPage(),
         ),
   };
 }

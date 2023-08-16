@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:food_recipes/data/models/random_food.dart';
+import 'package:food_recipes/data/models/detail_food.dart';
 import 'package:food_recipes/data/repository/meal_repository.dart';
 import 'package:meta/meta.dart';
 

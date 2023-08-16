@@ -5,13 +5,13 @@ import 'package:food_recipes/data/models/all_categories_food.dart';
 import 'package:food_recipes/data/models/filter_food.dart';
 import 'package:food_recipes/data/models/food_country.dart';
 import 'package:food_recipes/data/models/food_ingredient.dart';
-import 'package:food_recipes/data/models/random_food.dart';
+import 'package:food_recipes/data/models/detail_food.dart';
 import 'package:http/http.dart' as http;
 
 import '../const/api_const.dart';
 
 class MealRepository {
-  Future<RandomFood> getRandomFood() async {
+  Future<DetailFood> getRandomFood() async {
     Uri urlParse = Uri.parse("${ApiConst.baseUrl}/random.php");
     var response = await http.get(urlParse);
 
@@ -20,7 +20,7 @@ class MealRepository {
         Map<String, dynamic> meals =
             jsonDecode(response.body)["meals"][0] as Map<String, dynamic>;
 
-        RandomFood randomFood = RandomFood.fromJson(meals);
+        DetailFood randomFood = DetailFood.fromJson(meals);
         return randomFood;
       } else {
         throw Exception("Failed to Load data");
@@ -171,6 +171,25 @@ class MealRepository {
         } else {
           return allFood.map((e) => FilterFood.fromJson(e)).toList();
         }
+      } else {
+        throw Exception("Failed to Load data");
+      }
+    } on SocketException {
+      throw Exception("Check Internet Connection");
+    }
+  }
+
+  Future<DetailFood> getDetailFood(String idMeal) async {
+    Uri urlParse = Uri.parse("${ApiConst.baseUrl}/lookup.php?i=$idMeal");
+    var response = await http.get(urlParse);
+
+    try {
+      if (response.statusCode == 200) {
+        Map<String, dynamic> meals =
+            jsonDecode(response.body)["meals"][0] as Map<String, dynamic>;
+
+        DetailFood detailFood = DetailFood.fromJson(meals);
+        return detailFood;
       } else {
         throw Exception("Failed to Load data");
       }

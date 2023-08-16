@@ -112,6 +112,7 @@ class HomePage extends StatelessWidget {
                   if (state is CookingIdeaSuccess) {
                     return CookingIdea(
                       width: width,
+                      idMeal: state.randomFood.id,
                       networkImageName: state.randomFood.mealThumb,
                       titleFood: state.randomFood.mealName,
                       titleArea: state.randomFood.mealArea,
@@ -121,6 +122,7 @@ class HomePage extends StatelessWidget {
                   }
                   return CookingIdea(
                     width: width,
+                    idMeal: "1",
                     networkImageName:
                         "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg",
                     titleFood: "",

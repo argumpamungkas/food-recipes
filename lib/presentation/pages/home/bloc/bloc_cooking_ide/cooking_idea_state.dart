@@ -10,7 +10,7 @@ final class CookingIdeaInitial extends CookingIdeaState {}
 final class CookingIdeaLoading extends CookingIdeaState {}
 
 final class CookingIdeaSuccess extends CookingIdeaState {
-  RandomFood randomFood;
+  DetailFood randomFood;
 
   CookingIdeaSuccess(this.randomFood);
 }

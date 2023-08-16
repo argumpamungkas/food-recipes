@@ -6,6 +6,7 @@ class CookingIdea extends StatelessWidget {
   CookingIdea({
     super.key,
     required this.width,
+    required this.idMeal,
     required this.networkImageName,
     required this.titleFood,
     required this.titleCategory,
@@ -14,6 +15,7 @@ class CookingIdea extends StatelessWidget {
   });
 
   final double width;
+  String idMeal;
   String networkImageName;
   String titleFood;
   String titleCategory;
@@ -29,7 +31,8 @@ class CookingIdea extends StatelessWidget {
       shadowColor: Colors.blueGrey.shade300,
       animationDuration: const Duration(seconds: 3),
       child: InkWell(
-        onTap: () {},
+        onTap: () =>
+            Navigator.pushNamed(context, "/detailFood", arguments: idMeal),
         splashColor: Colors.amber,
         hoverColor: Colors.amber,
         highlightColor: Colors.amber,
