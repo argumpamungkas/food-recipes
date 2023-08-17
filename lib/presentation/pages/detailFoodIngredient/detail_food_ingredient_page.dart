@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,8 @@ import 'package:food_recipes/presentation/pages/detailFoodIngredient/bloc/detail
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DetailFoodIngredientPage extends StatefulWidget {
-  const DetailFoodIngredientPage({super.key});
+  String nameIngredient;
+  DetailFoodIngredientPage({super.key, required this.nameIngredient});
 
   @override
   State<DetailFoodIngredientPage> createState() =>
@@ -19,7 +22,7 @@ class _DetailFoodIngredientPageState extends State<DetailFoodIngredientPage> {
     Future.microtask(
       () => context.read<DetailFoodIngredientBloc>().add(
             EventDetailFoodIngredient(
-              ModalRoute.of(context)?.settings.arguments as String,
+              widget.nameIngredient,
             ),
           ),
     );
@@ -27,8 +30,6 @@ class _DetailFoodIngredientPageState extends State<DetailFoodIngredientPage> {
 
   @override
   Widget build(BuildContext context) {
-    String nameIngredient =
-        ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -37,7 +38,7 @@ class _DetailFoodIngredientPageState extends State<DetailFoodIngredientPage> {
         backgroundColor: Colors.white54,
         elevation: 0,
         title: Text(
-          nameIngredient,
+          widget.nameIngredient,
           style:
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),

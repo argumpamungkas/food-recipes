@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CookingIdea extends StatelessWidget {
   CookingIdea({
@@ -69,15 +70,17 @@ class CookingIdea extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    AutoSizeText(
                       titleFood,
+                      maxLines: 3,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       "$titleArea, $titleCategory",
+                      maxLines: 1,
                       style: const TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 10),
@@ -89,8 +92,9 @@ class CookingIdea extends StatelessWidget {
                         color: Colors.black54,
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       titleSuitible,
+                      maxLines: 2,
                       style: const TextStyle(color: Colors.grey),
                     ),
                   ],

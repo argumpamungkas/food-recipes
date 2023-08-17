@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,8 @@ import 'package:food_recipes/presentation/pages/detailFoodCategory/bloc/detail_f
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DetailFoodCategoryPage extends StatefulWidget {
-  const DetailFoodCategoryPage({super.key});
+  String categoryName;
+  DetailFoodCategoryPage({super.key, required this.categoryName});
 
   @override
   State<DetailFoodCategoryPage> createState() => _DetailFoodCategoryPageState();
@@ -18,7 +21,7 @@ class _DetailFoodCategoryPageState extends State<DetailFoodCategoryPage> {
     Future.microtask(
       () => context.read<DetailFoodCategoryBloc>().add(
             EventDetailFoodCategory(
-              ModalRoute.of(context)?.settings.arguments as String,
+              widget.categoryName,
             ),
           ),
     );
@@ -26,7 +29,6 @@ class _DetailFoodCategoryPageState extends State<DetailFoodCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    String nameMeal = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -35,7 +37,7 @@ class _DetailFoodCategoryPageState extends State<DetailFoodCategoryPage> {
         backgroundColor: Colors.white54,
         elevation: 0,
         title: Text(
-          nameMeal,
+          widget.categoryName,
           style:
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),

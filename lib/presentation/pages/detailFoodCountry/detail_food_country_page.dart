@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,8 @@ import 'package:food_recipes/presentation/pages/detailFoodCountry/bloc/detail_fo
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DetailFoodCountryPage extends StatefulWidget {
-  const DetailFoodCountryPage({super.key});
+  String nameCountry;
+  DetailFoodCountryPage({super.key, required this.nameCountry});
 
   @override
   State<DetailFoodCountryPage> createState() => _DetailFoodCountryPageState();
@@ -18,7 +21,7 @@ class _DetailFoodCountryPageState extends State<DetailFoodCountryPage> {
     Future.microtask(
       () => context.read<DetailFoodCountryBloc>().add(
             EventDetailFoodCountry(
-              ModalRoute.of(context)?.settings.arguments as String,
+              widget.nameCountry,
             ),
           ),
     );
@@ -26,7 +29,6 @@ class _DetailFoodCountryPageState extends State<DetailFoodCountryPage> {
 
   @override
   Widget build(BuildContext context) {
-    String nameCountry = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -35,7 +37,7 @@ class _DetailFoodCountryPageState extends State<DetailFoodCountryPage> {
         backgroundColor: Colors.white54,
         elevation: 0,
         title: Text(
-          nameCountry,
+          "${widget.nameCountry} Food",
           style:
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
