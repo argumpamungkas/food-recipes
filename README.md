@@ -14,7 +14,7 @@ API :
 Package :
 - BLoC
 - http
-- sqlflite
+- sqflite
 - shimmer
 - sharedpreferences
 - lottie
