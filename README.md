@@ -1,17 +1,24 @@
-# food_recipes
+## FOOD RECIPES
 
-A new Flutter project.
+This app uses BLoC State Management.
 
-## Getting Started
+![Uploading Food Recipes-min.png…]()
 
-This project is a starting point for a Flutter application.
+  
+  This food recipe application contains recipes from different countries, equipped with the right type of time to cook, such as breakfast or dessert. Not only that, this application provides dishes according to the ingredients you have, just customize it.
 
-A few resources to get you started if this is your first Flutter project:
+## Using
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+API :
+- [MEALDB](https://www.themealdb.com/api.php)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"#food-recipes" 
+Package :
+- get
+- http
+- sqlflite
+- shimmer
+- sharedpreferences
+- lottie
+
+## THANK YOU
+😊😊
